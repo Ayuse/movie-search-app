@@ -5,12 +5,7 @@ const Cards = ({ data }) => {
   return (
     <Box>
       <Text color="black">{data.Title}</Text>
-      <Box
-        w="300px"
-        h="300px"
-        borderRadius="12px"
-        bgImage="url('${data.Poster'})"
-      >
+      <Box w="300px" h="300px" borderRadius="12px">
         <Image src={data.Poster} />
         {console.log(data.Poster)}
       </Box>

@@ -1,15 +1,18 @@
+import React, { useEffect, useState, useContext } from 'react';
 import { Box, Spinner, Center, Flex, List, HStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
 import Cards from './Cards';
+import { SearchContext } from './Context';
 
-const Moviecards = () => {
+function Moviecards() {
+  const { value } = useContext(SearchContext);
+
   useEffect(() => {
     getData();
-  }, []);
+  }, [value]);
 
   const getData = async () => {
     const data = await fetch(
-      `https://www.omdbapi.com/?s=christmas&apikey=7b1a56c6`
+      `https://www.omdbapi.com/?s=${value}&apikey=7b1a56c6`
     ).then(data => data.json());
     setMovies(data.Search);
     return { info: data.Search };
@@ -32,7 +35,7 @@ const Moviecards = () => {
     <List>
       <HStack overflow="scroll">
         {movies.map(movie => (
-          <Box>
+          <Box m="30px">
             <Flex>
               <Cards data={movie} />
             </Flex>
@@ -42,6 +45,6 @@ const Moviecards = () => {
       </HStack>
     </List>
   );
-};
+}
 
 export default Moviecards;

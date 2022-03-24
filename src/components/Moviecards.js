@@ -7,16 +7,15 @@ function Moviecards() {
   const { value } = useContext(SearchContext);
 
   useEffect(() => {
+    const getData = async () => {
+      const data = await fetch(
+        `https://www.omdbapi.com/?s=${value}&apikey=7b1a56c6`
+      ).then(data => data.json());
+      setMovies(data.Search);
+      return { info: data.Search };
+    };
     getData();
   }, [value]);
-
-  const getData = async () => {
-    const data = await fetch(
-      `https://www.omdbapi.com/?s=${value}&apikey=7b1a56c6`
-    ).then(data => data.json());
-    setMovies(data.Search);
-    return { info: data.Search };
-  };
 
   const [movies, setMovies] = useState(null);
   if (!movies)
